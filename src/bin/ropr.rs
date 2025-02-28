@@ -4,7 +4,7 @@ use core::panic;
 use iced_x86::{FormatterOutput, FormatterTextKind};
 use rayon::prelude::*;
 use regex::Regex;
-use ropr::{
+use kerop::{
 	binary::Binary, disassembler::Disassembly, formatter::ColourFormatter, gadgets::Gadget,
 };
 use rustc_hash::FxHashMap;

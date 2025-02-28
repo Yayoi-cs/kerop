@@ -1,12 +1,12 @@
 use iced_x86::{Code, FlowControl, Instruction, Mnemonic, OpKind, Register};
 
-fn is_ret(instr: &Instruction) -> bool { matches!(instr.mnemonic(), Mnemonic::Ret) }
+fn is_ret(instr: &Instruction) -> bool { matches!(instr.mnemonic(), Mnemonic::Ret | Mnemonic::Iretq | Mnemonic::Iret | Mnemonic::Iretd) }
 
 fn is_sys(instr: &Instruction) -> bool {
 	match instr.mnemonic() {
 		Mnemonic::Syscall => true,
 		Mnemonic::Int => matches!(instr.try_immediate(0).unwrap(), 0x80),
-		Mnemonic::Iret | Mnemonic::Iretd | Mnemonic::Iretq => true,
+		Mnemonic::Iret | Mnemonic::Iretd | Mnemonic::Iretq => false,
 		Mnemonic::Sysret | Mnemonic::Sysretq | Mnemonic::Sysexit | Mnemonic::Sysexitq => true,
 		_ => false,
 	}
